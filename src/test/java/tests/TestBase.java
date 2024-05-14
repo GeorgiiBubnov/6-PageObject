@@ -12,8 +12,6 @@ public class TestBase {
         Configuration.browserSize = "1980x1080";
         Configuration.pageLoadStrategy = "eager";
 
-
-
     }
 
     @AfterEach

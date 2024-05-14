@@ -8,7 +8,7 @@ import pages.components.TableComponent;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
-public class RegistrationPage {
+public class RegistrationPage extends BasePage {
     CalendarComponent calendarComponent = new CalendarComponent();
     TableComponent tableComponent = new TableComponent();
 
@@ -22,15 +22,14 @@ public class RegistrationPage {
             hobbiesWrapper = $("#hobbiesWrapper"),
             userPictureInput = $("#uploadPicture"),
             currentAddressInput = $("#currentAddress"),
-            stateMenu = $("#state"),
-            selectState = $("#react-select-3-input"),
-            selectCity = $("#react-select-4-input"),
+            stateCityWrapper = $("#stateCity-wrapper"),
+            stateInput = $("#state"),
+            cityInput = $("#city"),
             submitButton = $("#submit");
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
+        this.removeBanners();
         return this;
     }
 
@@ -49,7 +48,7 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setGender(String value) {
+    public RegistrationPage selectGender(String value) {
         genderWrapper.$(byText(value)).click();
         return this;
     }
@@ -65,12 +64,12 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage setSubjectInput(String value) {
+    public RegistrationPage selectSubjectInput(String value) {
         subjectInput.setValue(value).pressEnter();
         return this;
     }
 
-    public RegistrationPage setHobbies(String value) {
+    public RegistrationPage selectHobbies(String value) {
         hobbiesWrapper.$(byText(value)).click();
         return this;
     }
@@ -85,18 +84,16 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage choiceStateMenu() {
-        stateMenu.click();
+
+    public RegistrationPage selectState(String value) {
+        stateInput.click();
+        stateCityWrapper.$(byText(value)).click();
         return this;
     }
 
-    public RegistrationPage setState(String value) {
-        selectState.val(value).pressEnter();
-        return this;
-    }
-
-    public RegistrationPage setCity(String value) {
-        selectCity.val(value).pressEnter();
+    public RegistrationPage selectCity(String value) {
+        cityInput.click();
+        stateCityWrapper.$(byText(value)).click();
         return this;
     }
 
